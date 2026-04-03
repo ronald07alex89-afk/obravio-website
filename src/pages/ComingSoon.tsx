@@ -15,13 +15,13 @@ import {
 } from 'lucide-react';
 
 const plates = [
-  { label: 'Estimating', icon: Calculator, x: -280, y: -120, z: 40 },
-  { label: 'Proposals', icon: FileText, x: 0, y: -140, z: 60 },
-  { label: 'Contracts', icon: FileSignature, x: 280, y: -110, z: 30 },
-  { label: 'Budgets', icon: BarChart3, x: -200, y: 40, z: 50 },
-  { label: 'Billing', icon: Receipt, x: 80, y: 30, z: 70 },
-  { label: 'Scheduling', icon: GanttChart, x: -80, y: 180, z: 35 },
-  { label: 'Payments', icon: CreditCard, x: 220, y: 160, z: 55 },
+  { label: 'Estimating', icon: Calculator, z: 40 },
+  { label: 'Proposals', icon: FileText, z: 60 },
+  { label: 'Contracts', icon: FileSignature, z: 30 },
+  { label: 'Budgets', icon: BarChart3, z: 50 },
+  { label: 'Billing', icon: Receipt, z: 70 },
+  { label: 'Scheduling', icon: GanttChart, z: 35 },
+  { label: 'Payments', icon: CreditCard, z: 55 },
 ];
 
 export function ComingSoon() {
@@ -81,77 +81,111 @@ export function ComingSoon() {
         Coming Soon
       </h1>
 
-      {/* 3D Floating Steel Plates — THE CENTERPIECE */}
+      {/* 3D Steel Plates Grid — THE CENTERPIECE */}
       <div
-        className="fade-in-d3 relative z-10 w-full flex items-center justify-center"
-        style={{ perspective: 1200, paddingTop: 20, paddingBottom: 20 }}
+        className="fade-in-d3 relative z-10 w-full flex items-center justify-center px-6 py-8"
+        style={{ perspective: 1000 }}
       >
-        {/* 3D container with gentle rotation animation */}
         <div
-          className="plates-3d-container hidden md:block relative"
           style={{
             transformStyle: 'preserve-3d',
+            transform: 'rotateX(8deg) rotateY(-3deg)',
             animation: 'gentleFloat3D 20s ease-in-out infinite',
-            width: 700,
-            height: 420,
           }}
         >
-          {plates.map((plate, i) => {
-            const Icon = plate.icon;
-            return (
-              <div
-                key={plate.label}
-                className="steel-plate absolute flex flex-col items-center justify-center gap-3 cursor-default"
-                style={{
-                  width: 140,
-                  height: 110,
-                  left: '50%',
-                  top: '50%',
-                  transform: `translate(-50%, -50%) translate3d(${plate.x}px, ${plate.y}px, ${plate.z}px) rotateX(-12deg) rotateY(8deg)`,
-                  transition: 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease',
-                  animationDelay: `${i * 0.8}s`,
-                  ['--float-z' as string]: `${plate.z}px`,
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = `translate(-50%, -50%) translate3d(${plate.x}px, ${plate.y}px, ${plate.z + 30}px) rotateX(-12deg) rotateY(8deg)`;
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(184,115,51,0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = `translate(-50%, -50%) translate3d(${plate.x}px, ${plate.y}px, ${plate.z}px) rotateX(-12deg) rotateY(8deg)`;
-                  (e.currentTarget as HTMLElement).style.borderColor = '';
-                }}
-              >
-                <Icon className="w-7 h-7 text-copper-icon" style={{ color: '#B87333', opacity: 0.8 }} />
-                <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>
-                  {plate.label}
-                </span>
-                {/* Plate corner rivets */}
-                <div className="rivet rivet-tl" style={{ width: 5, height: 5 }} />
-                <div className="rivet rivet-tr" style={{ width: 5, height: 5 }} />
-                <div className="rivet rivet-bl" style={{ width: 5, height: 5 }} />
-                <div className="rivet rivet-br" style={{ width: 5, height: 5 }} />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Mobile fallback — stacked list */}
-        <div className="md:hidden flex flex-wrap items-center justify-center gap-3 px-6 max-w-md">
-          {plates.map((plate) => {
-            const Icon = plate.icon;
-            return (
-              <div
-                key={plate.label}
-                className="steel-plate flex items-center gap-3 px-4 py-3"
-                style={{ minWidth: 150 }}
-              >
-                <Icon className="w-5 h-5 flex-shrink-0" style={{ color: '#B87333', opacity: 0.8 }} />
-                <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>
-                  {plate.label}
-                </span>
-              </div>
-            );
-          })}
+          {/* Row 1: 3 plates */}
+          <div className="flex items-center justify-center gap-4 mb-4">
+            {plates.slice(0, 3).map((plate) => {
+              const Icon = plate.icon;
+              return (
+                <div
+                  key={plate.label}
+                  className="steel-plate relative flex flex-col items-center justify-center gap-2.5 cursor-default w-[130px] h-[100px] sm:w-[150px] sm:h-[110px]"
+                  style={{
+                    transform: `translateZ(${plate.z}px)`,
+                    transition: 'transform 0.4s ease, border-color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = `translateZ(${plate.z + 25}px) scale(1.05)`;
+                    e.currentTarget.style.borderColor = 'rgba(184,115,51,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = `translateZ(${plate.z}px)`;
+                    e.currentTarget.style.borderColor = '';
+                  }}
+                >
+                  <Icon className="w-7 h-7" style={{ color: '#B87333', opacity: 0.85 }} />
+                  <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>{plate.label}</span>
+                  <div className="rivet rivet-tl" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-tr" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-bl" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-br" style={{ width: 5, height: 5 }} />
+                </div>
+              );
+            })}
+          </div>
+          {/* Row 2: 3 plates offset */}
+          <div className="flex items-center justify-center gap-4 mb-4">
+            {plates.slice(3, 6).map((plate) => {
+              const Icon = plate.icon;
+              return (
+                <div
+                  key={plate.label}
+                  className="steel-plate relative flex flex-col items-center justify-center gap-2.5 cursor-default w-[130px] h-[100px] sm:w-[150px] sm:h-[110px]"
+                  style={{
+                    transform: `translateZ(${plate.z}px)`,
+                    transition: 'transform 0.4s ease, border-color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = `translateZ(${plate.z + 25}px) scale(1.05)`;
+                    e.currentTarget.style.borderColor = 'rgba(184,115,51,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = `translateZ(${plate.z}px)`;
+                    e.currentTarget.style.borderColor = '';
+                  }}
+                >
+                  <Icon className="w-7 h-7" style={{ color: '#B87333', opacity: 0.85 }} />
+                  <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>{plate.label}</span>
+                  <div className="rivet rivet-tl" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-tr" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-bl" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-br" style={{ width: 5, height: 5 }} />
+                </div>
+              );
+            })}
+          </div>
+          {/* Row 3: 1 centered plate */}
+          <div className="flex items-center justify-center">
+            {plates.slice(6).map((plate) => {
+              const Icon = plate.icon;
+              return (
+                <div
+                  key={plate.label}
+                  className="steel-plate relative flex flex-col items-center justify-center gap-2.5 cursor-default w-[130px] h-[100px] sm:w-[150px] sm:h-[110px]"
+                  style={{
+                    transform: `translateZ(${plate.z}px)`,
+                    transition: 'transform 0.4s ease, border-color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = `translateZ(${plate.z + 25}px) scale(1.05)`;
+                    e.currentTarget.style.borderColor = 'rgba(184,115,51,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = `translateZ(${plate.z}px)`;
+                    e.currentTarget.style.borderColor = '';
+                  }}
+                >
+                  <Icon className="w-7 h-7" style={{ color: '#B87333', opacity: 0.85 }} />
+                  <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>{plate.label}</span>
+                  <div className="rivet rivet-tl" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-tr" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-bl" style={{ width: 5, height: 5 }} />
+                  <div className="rivet rivet-br" style={{ width: 5, height: 5 }} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
