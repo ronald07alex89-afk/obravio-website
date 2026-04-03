@@ -1,68 +1,204 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ObraviolLogo } from '../components/ObraviolLogo';
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import {
+  Calculator,
+  FileText,
+  BarChart3,
+  Receipt,
+  GanttChart,
+  CreditCard,
+  FileSignature,
+  ArrowLeft,
+  ArrowRight,
+  Check,
+} from 'lucide-react';
 
-const featureList = ['Estimating', 'Proposals', 'Contracts', 'Budgets', 'Billing', 'Scheduling', 'Payments'];
+const plates = [
+  { label: 'Estimating', icon: Calculator, x: -280, y: -120, z: 40 },
+  { label: 'Proposals', icon: FileText, x: 0, y: -140, z: 60 },
+  { label: 'Contracts', icon: FileSignature, x: 280, y: -110, z: 30 },
+  { label: 'Budgets', icon: BarChart3, x: -200, y: 40, z: 50 },
+  { label: 'Billing', icon: Receipt, x: 80, y: 30, z: 70 },
+  { label: 'Scheduling', icon: GanttChart, x: -80, y: 180, z: 35 },
+  { label: 'Payments', icon: CreditCard, x: 220, y: 160, z: 55 },
+];
 
 export function ComingSoon() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setVisibleCount((prev) => { if (prev >= featureList.length + 1) { clearInterval(timer); return prev; } return prev + 1; });
-    }, 300);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); if (email) { setSubmitted(true); setEmail(''); } };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSubmitted(true);
+      setEmail('');
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #111D2E 50%, #0D1B2A 100%)' }}>
-      <div className="absolute inset-0 dot-grid opacity-40" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#C8102E]/[0.04] rounded-full blur-[150px] pointer-events-none" />
+    <div
+      className="min-h-screen flex flex-col items-center relative overflow-hidden blueprint-grid concrete-texture"
+      style={{ background: 'linear-gradient(180deg, #0a1018 0%, #0d141d 40%, #111a26 100%)' }}
+    >
+      {/* Corner rivets */}
+      <div className="rivet" style={{ width: 12, height: 12, top: 16, left: 16, opacity: 0.3 }} />
+      <div className="rivet" style={{ width: 12, height: 12, top: 16, right: 16, opacity: 0.3 }} />
+      <div className="rivet" style={{ width: 12, height: 12, bottom: 16, left: 16, opacity: 0.3 }} />
+      <div className="rivet" style={{ width: 12, height: 12, bottom: 16, right: 16, opacity: 0.3 }} />
 
-      <div className="fade-in mb-16 relative z-10"><ObraviolLogo iconSize={48} /></div>
+      {/* Ambient red/copper glow behind the grid */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '30%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 700,
+          height: 500,
+          background: 'radial-gradient(ellipse, rgba(184,115,51,0.08) 0%, rgba(200,16,46,0.04) 40%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
 
-      <h1 className="fade-in-d2 text-5xl sm:text-6xl md:text-7xl font-[800] tracking-tight text-center mb-6 text-white relative z-10">Coming Soon</h1>
-
-      <p className="fade-in-d3 text-white/40 text-lg md:text-xl text-center max-w-2xl leading-relaxed mb-12 relative z-10">
-        Obravio is a full-stack construction management platform that handles estimating, proposals, contracts, budgets, billing, scheduling, and payments — all in one place. Powered by AI. Built on real jobsite experience.
-      </p>
-
-      <div className="flex flex-wrap items-center justify-center gap-3 mb-14 max-w-xl relative z-10">
-        {featureList.map((feature, idx) => (
-          <span key={feature} className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/60 text-sm font-medium transition-all duration-400"
-            style={{ opacity: idx < visibleCount ? 1 : 0, transform: idx < visibleCount ? 'scale(1)' : 'scale(0.8) translateY(10px)' }}>
-            {feature}
-          </span>
-        ))}
-        {visibleCount > featureList.length && (
-          <span className="flex items-center gap-1.5 fade-in">
-            <span className="text-white/20 text-2xl mx-2">&rarr;</span>
-            <span className="px-4 py-2 rounded-full bg-[#C8102E]/10 border border-[#C8102E]/30 text-[#C8102E] text-sm font-bold">One Platform</span>
-          </span>
-        )}
+      {/* Header — logo */}
+      <div className="fade-in pt-16 pb-10 relative z-10">
+        <ObraviolLogo iconSize={48} />
       </div>
 
-      <form onSubmit={handleSubmit} className="fade-in-d5 flex flex-col sm:flex-row gap-3 w-full max-w-md mb-10 relative z-10">
+      {/* COMING SOON headline */}
+      <h1
+        className="fade-in-d1 font-headline uppercase text-center relative z-10 text-metallic"
+        style={{
+          fontSize: 'clamp(3rem, 10vw, 7rem)',
+          fontWeight: 900,
+          letterSpacing: '0.08em',
+          lineHeight: 1,
+          textShadow: '2px 2px 0 #080f18, 4px 4px 0 rgba(8,15,24,0.5), 0 0 40px rgba(184,115,51,0.15)',
+          marginBottom: '0.25em',
+        }}
+      >
+        Coming Soon
+      </h1>
+
+      {/* 3D Floating Steel Plates — THE CENTERPIECE */}
+      <div
+        className="fade-in-d3 relative z-10 w-full flex items-center justify-center"
+        style={{ perspective: 1200, paddingTop: 20, paddingBottom: 20 }}
+      >
+        {/* 3D container with gentle rotation animation */}
+        <div
+          className="plates-3d-container hidden md:block relative"
+          style={{
+            transformStyle: 'preserve-3d',
+            animation: 'gentleFloat3D 20s ease-in-out infinite',
+            width: 700,
+            height: 420,
+          }}
+        >
+          {plates.map((plate, i) => {
+            const Icon = plate.icon;
+            return (
+              <div
+                key={plate.label}
+                className="steel-plate absolute flex flex-col items-center justify-center gap-3 cursor-default"
+                style={{
+                  width: 140,
+                  height: 110,
+                  left: '50%',
+                  top: '50%',
+                  transform: `translate(-50%, -50%) translate3d(${plate.x}px, ${plate.y}px, ${plate.z}px) rotateX(-12deg) rotateY(8deg)`,
+                  transition: 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease',
+                  animationDelay: `${i * 0.8}s`,
+                  ['--float-z' as string]: `${plate.z}px`,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = `translate(-50%, -50%) translate3d(${plate.x}px, ${plate.y}px, ${plate.z + 30}px) rotateX(-12deg) rotateY(8deg)`;
+                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(184,115,51,0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = `translate(-50%, -50%) translate3d(${plate.x}px, ${plate.y}px, ${plate.z}px) rotateX(-12deg) rotateY(8deg)`;
+                  (e.currentTarget as HTMLElement).style.borderColor = '';
+                }}
+              >
+                <Icon className="w-7 h-7 text-copper-icon" style={{ color: '#B87333', opacity: 0.8 }} />
+                <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>
+                  {plate.label}
+                </span>
+                {/* Plate corner rivets */}
+                <div className="rivet rivet-tl" style={{ width: 5, height: 5 }} />
+                <div className="rivet rivet-tr" style={{ width: 5, height: 5 }} />
+                <div className="rivet rivet-bl" style={{ width: 5, height: 5 }} />
+                <div className="rivet rivet-br" style={{ width: 5, height: 5 }} />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile fallback — stacked list */}
+        <div className="md:hidden flex flex-wrap items-center justify-center gap-3 px-6 max-w-md">
+          {plates.map((plate) => {
+            const Icon = plate.icon;
+            return (
+              <div
+                key={plate.label}
+                className="steel-plate flex items-center gap-3 px-4 py-3"
+                style={{ minWidth: 150 }}
+              >
+                <Icon className="w-5 h-5 flex-shrink-0" style={{ color: '#B87333', opacity: 0.8 }} />
+                <span className="label-uppercase text-white/70" style={{ fontSize: '0.65rem' }}>
+                  {plate.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Tagline */}
+      <p
+        className="fade-in-d4 font-headline uppercase text-center relative z-10 text-copper mt-4 mb-12"
+        style={{ letterSpacing: '0.18em', fontSize: 'clamp(0.7rem, 2vw, 0.95rem)', fontWeight: 700 }}
+      >
+        The platform that replaces everything.
+      </p>
+
+      {/* Waitlist form */}
+      <form
+        onSubmit={handleSubmit}
+        className="fade-in-d5 flex flex-col sm:flex-row gap-3 w-full max-w-md px-6 mb-14 relative z-10"
+      >
         {submitted ? (
-          <div className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-            <Check className="w-5 h-5" /><span className="font-medium">You're on the list!</span>
+          <div className="flex items-center justify-center gap-2 w-full py-3.5 px-6 steel-plate text-emerald-400">
+            <Check className="w-5 h-5" />
+            <span className="font-headline font-bold uppercase tracking-wider text-sm">You're on the list</span>
           </div>
-        ) : (<>
-          <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required
-            className="flex-1 px-5 py-3.5 rounded-lg bg-white/[0.04] border border-white/10 text-white placeholder-white/30 outline-none focus:border-[#C8102E]/50 focus:ring-1 focus:ring-[#C8102E]/30 transition-all" />
-          <button type="submit" className="px-6 py-3.5 bg-[#C8102E] hover:bg-[#E01535] text-white font-semibold rounded-lg transition-all hover:shadow-[0_0_30px_rgba(200,16,46,0.3)] flex items-center justify-center gap-2 whitespace-nowrap">
-            Join Waitlist <ArrowRight className="w-4 h-4" />
-          </button>
-        </>)}
+        ) : (
+          <>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="input-industrial flex-1"
+            />
+            <button type="submit" className="btn-primary whitespace-nowrap">
+              Join the Waitlist <ArrowRight className="w-4 h-4" />
+            </button>
+          </>
+        )}
       </form>
 
-      <div className="fade-in-d7 relative z-10">
-        <Link to="/" className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors">
+      {/* Safety stripe */}
+      <div className="safety-stripe w-full max-w-lg fade-in-d6 relative z-10" />
+
+      {/* Back to Home */}
+      <div className="fade-in-d7 relative z-10 py-10">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors font-headline uppercase tracking-wider"
+        >
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
       </div>

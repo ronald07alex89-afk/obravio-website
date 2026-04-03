@@ -253,6 +253,18 @@ body {
   animation: shimmer 6s linear infinite;
 }
 
+/* 3D floating grid gentle rotation */
+@keyframes gentleFloat3D {
+  0%, 100% { transform: rotateX(-8deg) rotateY(-5deg); }
+  50% { transform: rotateX(-8deg) rotateY(5deg); }
+}
+
+/* Individual plate float */
+@keyframes plateFloat {
+  0%, 100% { transform: translateZ(var(--float-z)) translateY(0); }
+  50% { transform: translateZ(var(--float-z)) translateY(-8px); }
+}
+
 /* ─── LABEL STYLE ─── */
 .label-uppercase {
   text-transform: uppercase;
