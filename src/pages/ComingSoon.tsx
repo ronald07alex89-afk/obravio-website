@@ -28,11 +28,25 @@ export function ComingSoon() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+    setLoading(true);
+    try {
+      await fetch('https://mhvgbquhfmcfrgwfrvmo.supabase.co/functions/v1/waitlist-signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'coming-soon' }),
+      });
       setSubmitted(true);
       setEmail('');
+    } catch {
+      setSubmitted(true);
+      setEmail('');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -217,7 +231,7 @@ export function ComingSoon() {
               required
               className="input-industrial flex-1"
             />
-            <button type="submit" className="btn-primary whitespace-nowrap">
+            <button type="submit" disabled={loading} className="btn-primary whitespace-nowrap disabled:opacity-50">
               Join the Waitlist <ArrowRight className="w-4 h-4" />
             </button>
           </>
