@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/coming-soon",
+      "destination": "https://app.obravio.com/signup",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
