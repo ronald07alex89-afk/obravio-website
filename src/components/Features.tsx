@@ -32,7 +32,7 @@ const features = [
   {
     icon: GanttChart,
     title: 'CPM Scheduling',
-    description: 'P6-grade critical path scheduling with Gantt charts',
+    description: 'Critical path scheduling with Gantt charts',
   },
   {
     icon: CreditCard,
