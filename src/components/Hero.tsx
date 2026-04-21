@@ -63,8 +63,6 @@ export function Hero() {
           <div className="animate-fade-in-up delay-1000 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="https://app.obravio.com/signup"
-              target="_blank"
-              rel="noopener noreferrer"
               className="px-8 py-3.5 bg-[#C8102E] hover:bg-[#E01535] text-white font-semibold rounded-lg transition-all hover:shadow-[0_0_30px_rgba(200,16,46,0.3)] text-base"
             >
               Get Started
