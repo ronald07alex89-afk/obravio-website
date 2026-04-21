@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export function Hero() {
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#0D1B2A]">
