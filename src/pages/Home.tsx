@@ -30,7 +30,7 @@ function Navbar() {
           <a href="#features" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Features</a>
           <a href="#built-different" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Built Different</a>
           <a href="#early-access" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Early Access</a>
-          <Link to="/coming-soon" className="btn-primary !py-2 !px-5 !text-xs">Get Started</Link>
+          <a href="https://app.obravio.com/signup" target="_blank" rel="noopener noreferrer" className="btn-primary !py-2 !px-5 !text-xs">Get Started</a>
         </div>
         <button className="md:hidden text-white/70" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -41,7 +41,7 @@ function Navbar() {
           <a href="#features" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Features</a>
           <a href="#built-different" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Built Different</a>
           <a href="#early-access" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Early Access</a>
-          <Link to="/coming-soon" className="block w-full text-center btn-primary !py-2.5" onClick={() => setOpen(false)}>Get Started</Link>
+          <a href="https://app.obravio.com/signup" target="_blank" rel="noopener noreferrer" className="block w-full text-center btn-primary !py-2.5" onClick={() => setOpen(false)}>Get Started</a>
         </div>
       )}
     </nav>
@@ -85,13 +85,13 @@ function Hero() {
         <p className="fade-in-d3 text-lg md:text-xl text-white/40 leading-relaxed max-w-2xl mx-auto mb-12 font-light">
           From estimates to pay apps, Obravio replaces your entire tech
           stack with one intelligent platform. Built by a general contractor
-          who got tired of Buildertrend.
+          who got tired of clunky, overpriced construction software.
         </p>
 
         <div className="fade-in-d4 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to="/coming-soon" className="btn-primary">
+          <a href="https://app.obravio.com/signup" target="_blank" rel="noopener noreferrer" className="btn-primary">
             Get Started <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
           <a href="https://app.obravio.com" target="_blank" rel="noopener noreferrer" className="btn-outline">
             Log in to Obravio
           </a>

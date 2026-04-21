@@ -57,12 +57,14 @@ export function Navbar() {
               </Link>
             )
           )}
-          <Link
-            to="/coming-soon"
+          <a
+            href="https://app.obravio.com/signup"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-5 py-2 bg-[#C8102E] hover:bg-[#E01535] text-white text-sm font-semibold rounded-lg transition-colors"
           >
             Get Started
-          </Link>
+          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -98,13 +100,15 @@ export function Navbar() {
               </Link>
             )
           )}
-          <Link
-            to="/coming-soon"
+          <a
+            href="https://app.obravio.com/signup"
+            target="_blank"
+            rel="noopener noreferrer"
             className="block w-full text-center px-5 py-2.5 bg-[#C8102E] hover:bg-[#E01535] text-white text-sm font-semibold rounded-lg transition-colors"
             onClick={() => setMobileOpen(false)}
           >
             Get Started
-          </Link>
+          </a>
         </div>
       )}
     </nav>
