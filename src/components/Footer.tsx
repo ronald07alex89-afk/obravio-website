@@ -40,8 +40,7 @@ export function Footer() {
 
         <div className="mt-8 pt-6 border-t border-white/[0.04] text-center">
           <p className="text-white/20 text-xs">
-            &copy; {new Date().getFullYear()} Obravio. A product of RG Legacy
-            Construction, LLC.
+            &copy; {new Date().getFullYear()} Obravio LLC. All rights reserved.
           </p>
         </div>
       </div>

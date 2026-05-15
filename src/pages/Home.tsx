@@ -293,7 +293,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-[#B87333]/5 text-center">
-          <p className="text-white/20 text-xs">&copy; 2026 Obravio. A product of RG Legacy Construction, LLC.</p>
+          <p className="text-white/20 text-xs">&copy; {new Date().getFullYear()} Obravio LLC. All rights reserved.</p>
         </div>
       </div>
     </footer>
