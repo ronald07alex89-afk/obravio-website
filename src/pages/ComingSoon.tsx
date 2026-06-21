@@ -241,13 +241,25 @@ export function ComingSoon() {
       {/* Safety stripe */}
       <div className="safety-stripe w-full max-w-lg fade-in-d6 relative z-10" />
 
-      {/* Back to Home */}
-      <div className="fade-in-d7 relative z-10 py-10">
+      {/* Back to Home + legal links */}
+      <div className="fade-in-d7 relative z-10 py-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors font-headline uppercase tracking-wider"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Home
+        </Link>
+        <Link
+          to="/privacy"
+          className="text-white/30 hover:text-white/60 text-sm transition-colors font-headline uppercase tracking-wider"
+        >
+          Privacy
+        </Link>
+        <Link
+          to="/terms"
+          className="text-white/30 hover:text-white/60 text-sm transition-colors font-headline uppercase tracking-wider"
+        >
+          Terms
         </Link>
       </div>
     </div>

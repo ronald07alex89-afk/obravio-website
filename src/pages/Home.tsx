@@ -283,10 +283,11 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <Link to="/"><ObraviolLogo iconSize={32} /></Link>
-          <div className="flex items-center gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <a href="#features" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Features</a>
-            <span className="label-uppercase text-white/15">Pricing (Coming Soon)</span>
-            <a href="mailto:hello@obravio.com" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Contact</a>
+            <Link to="/privacy" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Terms of Service</Link>
+            <a href="mailto:contact@obravio.com" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Contact</a>
           </div>
           <div className="flex items-center gap-2 text-[#B87333]/50 text-sm">
             <Palmtree className="w-4 h-4" /><span>Made in Miami</span>

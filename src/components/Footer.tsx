@@ -13,18 +13,27 @@ export function Footer() {
           </Link>
 
           {/* Links */}
-          <div className="flex items-center gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <a
               href="#features"
               className="text-sm text-white/40 hover:text-white/70 transition-colors"
             >
               Features
             </a>
-            <span className="text-sm text-white/20">
-              Pricing (Coming Soon)
-            </span>
+            <Link
+              to="/privacy"
+              className="text-sm text-white/40 hover:text-white/70 transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms"
+              className="text-sm text-white/40 hover:text-white/70 transition-colors"
+            >
+              Terms of Service
+            </Link>
             <a
-              href="mailto:hello@obravio.com"
+              href="mailto:contact@obravio.com"
               className="text-sm text-white/40 hover:text-white/70 transition-colors"
             >
               Contact
