@@ -26,7 +26,7 @@ const features = [
   },
   {
     icon: Receipt,
-    title: 'AIA Billing (G702/G703)',
+    title: 'Construction Billing',
     description: 'Owner pay apps with built-in retainage and lien waivers',
   },
   {

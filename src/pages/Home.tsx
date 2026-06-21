@@ -112,7 +112,7 @@ const features = [
   { icon: Calculator, title: 'Estimating & Proposals', desc: 'AI-powered estimates with one-click professional proposals.' },
   { icon: FileText, title: 'Contracts & Change Orders', desc: 'Prime contracts, subcontracts, and COs with digital signatures.' },
   { icon: BarChart3, title: 'Budget & Cost Tracking', desc: 'Real-time budget vs. actual with margin analysis and projections.' },
-  { icon: Receipt, title: 'AIA Billing (G702/G703)', desc: 'Owner pay apps with built-in retainage and lien waivers.' },
+  { icon: Receipt, title: 'Construction Billing', desc: 'Owner pay apps with built-in retainage and lien waivers.' },
   { icon: GanttChart, title: 'CPM Scheduling', desc: 'Critical path scheduling with Gantt charts and an AI schedule builder.' },
   { icon: CreditCard, title: 'Payments', desc: 'Collect from owners and pay subs — all inside the platform.' },
 ];
