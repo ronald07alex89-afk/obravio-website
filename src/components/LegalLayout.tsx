@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ObraviolLogo } from './ObraviolLogo';
+import { ContactLink } from './ContactLink';
 import { Palmtree, Menu, X, ArrowLeft } from 'lucide-react';
 
 /* ─── Navbar (Iron & Concrete, matches Home) ─── */
@@ -14,7 +15,7 @@ function LegalNavbar() {
           <Link to="/" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Home</Link>
           <Link to="/privacy" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Privacy</Link>
           <Link to="/terms" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Terms</Link>
-          <a href="mailto:contact@obravio.com?subject=Obravio%20access%20request" className="btn-primary !py-2 !px-5 !text-xs">Get Started</a>
+          <Link to="/#early-access" className="btn-primary !py-2 !px-5 !text-xs">Get Started</Link>
         </div>
         <button className="md:hidden text-white/70" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -25,7 +26,7 @@ function LegalNavbar() {
           <Link to="/" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Home</Link>
           <Link to="/privacy" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Privacy</Link>
           <Link to="/terms" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Terms</Link>
-          <a href="mailto:contact@obravio.com?subject=Obravio%20access%20request" className="block w-full text-center btn-primary !py-2.5" onClick={() => setOpen(false)}>Get Started</a>
+          <Link to="/#early-access" className="block w-full text-center btn-primary !py-2.5" onClick={() => setOpen(false)}>Get Started</Link>
         </div>
       )}
     </nav>
@@ -42,7 +43,7 @@ function LegalFooter() {
           <div className="flex items-center gap-8">
             <Link to="/privacy" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Terms of Service</Link>
-            <a href="mailto:contact@obravio.com" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Contact</a>
+            <ContactLink className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors" />
           </div>
           <div className="flex items-center gap-2 text-[#B87333]/50 text-sm">
             <Palmtree className="w-4 h-4" /><span>Made in Miami</span>

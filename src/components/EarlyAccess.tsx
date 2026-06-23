@@ -1,15 +1,25 @@
 import { useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
+import { submitLead } from '../lib/waitlist';
 
 export function EarlyAccess() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+    setLoading(true);
+    setError(false);
+    const ok = await submitLead({ email, source: 'obravio.com — early access' });
+    if (ok) {
       setSubmitted(true);
       setEmail('');
+    } else {
+      setError(true);
     }
+    setLoading(false);
   };
 
   return (
@@ -56,7 +66,8 @@ export function EarlyAccess() {
               />
               <button
                 type="submit"
-                className="px-6 py-3.5 bg-[#C8102E] hover:bg-[#E01535] text-white font-semibold rounded-lg transition-all hover:shadow-[0_0_30px_rgba(200,16,46,0.3)] flex items-center justify-center gap-2 whitespace-nowrap"
+                disabled={loading}
+                className="px-6 py-3.5 bg-[#C8102E] hover:bg-[#E01535] text-white font-semibold rounded-lg transition-all hover:shadow-[0_0_30px_rgba(200,16,46,0.3)] flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-50"
               >
                 Join the Waitlist
                 <ArrowRight className="w-4 h-4" />
@@ -64,6 +75,11 @@ export function EarlyAccess() {
             </>
           )}
         </form>
+        {error && !submitted && (
+          <p className="text-[#D4956B] text-sm mt-3">
+            Something went wrong. Please try again or email contact@obravio.com.
+          </p>
+        )}
       </div>
     </section>
   );

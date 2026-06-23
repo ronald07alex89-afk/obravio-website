@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ObraviolLogo } from '../components/ObraviolLogo';
+import { submitLead } from '../lib/waitlist';
 import {
   Calculator,
   FileText,
@@ -27,27 +28,22 @@ const plates = [
 export function ComingSoon() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    try {
-      await fetch('https://mhvgbquhfmcfrgwfrvmo.supabase.co/functions/v1/waitlist-signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'coming-soon' }),
-      });
+    setError(false);
+    const ok = await submitLead({ email, source: 'obravio.com — coming soon' });
+    if (ok) {
       setSubmitted(true);
       setEmail('');
-    } catch {
-      setSubmitted(true);
-      setEmail('');
-    } finally {
-      setLoading(false);
+    } else {
+      setError(true);
     }
+    setLoading(false);
   };
 
   return (
@@ -237,6 +233,11 @@ export function ComingSoon() {
           </>
         )}
       </form>
+      {error && !submitted && (
+        <p className="fade-in-d5 text-[#D4956B] text-sm -mt-10 mb-12 relative z-10 px-6 text-center">
+          Something went wrong. Please try again or email contact@obravio.com.
+        </p>
+      )}
 
       {/* Safety stripe */}
       <div className="safety-stripe w-full max-w-lg fade-in-d6 relative z-10" />

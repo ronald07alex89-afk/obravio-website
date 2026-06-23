@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ObraviolLogo } from './ObraviolLogo';
+import { ContactLink } from './ContactLink';
 import { Palmtree } from 'lucide-react';
 
 export function Footer() {
@@ -32,12 +33,7 @@ export function Footer() {
             >
               Terms of Service
             </Link>
-            <a
-              href="mailto:contact@obravio.com"
-              className="text-sm text-white/40 hover:text-white/70 transition-colors"
-            >
-              Contact
-            </a>
+            <ContactLink className="text-sm text-white/40 hover:text-white/70 transition-colors" />
           </div>
 
           {/* Made in Miami */}

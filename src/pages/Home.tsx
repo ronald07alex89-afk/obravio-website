@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ObraviolLogo } from '../components/ObraviolLogo';
+import { ContactLink } from '../components/ContactLink';
+import { submitLead } from '../lib/waitlist';
 import {
   Calculator, FileText, BarChart3, Receipt, GanttChart, CreditCard,
   Shield, Award, BadgeCheck, HardHat, ArrowRight, Check,
@@ -30,7 +32,7 @@ function Navbar() {
           <a href="#features" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Features</a>
           <a href="#built-different" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Built Different</a>
           <a href="#early-access" className="label-uppercase text-white/50 hover:text-[#D4956B] transition-colors">Early Access</a>
-          <a href="mailto:hello@obravio.com?subject=Obravio%20access%20request" className="btn-primary !py-2 !px-5 !text-xs">Get Started</a>
+          <a href="#early-access" className="btn-primary !py-2 !px-5 !text-xs">Get Started</a>
         </div>
         <button className="md:hidden text-white/70" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -41,7 +43,7 @@ function Navbar() {
           <a href="#features" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Features</a>
           <a href="#built-different" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Built Different</a>
           <a href="#early-access" className="block text-white/60 hover:text-white py-2 label-uppercase" onClick={() => setOpen(false)}>Early Access</a>
-          <a href="mailto:hello@obravio.com?subject=Obravio%20access%20request" className="block w-full text-center btn-primary !py-2.5" onClick={() => setOpen(false)}>Get Started</a>
+          <a href="#early-access" className="block w-full text-center btn-primary !py-2.5" onClick={() => setOpen(false)}>Get Started</a>
         </div>
       )}
     </nav>
@@ -89,7 +91,7 @@ function Hero() {
         </p>
 
         <div className="fade-in-d4 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="mailto:hello@obravio.com?subject=Obravio%20access%20request" className="btn-primary">
+          <a href="#early-access" className="btn-primary">
             Get Started <ArrowRight className="w-4 h-4" />
           </a>
           <a href="https://app.obravio.com" target="_blank" rel="noopener noreferrer" className="btn-outline">
@@ -210,25 +212,21 @@ function EarlyAccess() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    try {
-      await fetch('https://mhvgbquhfmcfrgwfrvmo.supabase.co/functions/v1/waitlist-signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'homepage' }),
-      });
+    setError(false);
+    const ok = await submitLead({ email, source: 'obravio.com — early access' });
+    if (ok) {
       setSubmitted(true);
       setEmail('');
-    } catch {
-      setSubmitted(true);
-      setEmail('');
-    } finally {
-      setLoading(false);
+    } else {
+      setError(true);
     }
+    setLoading(false);
   };
 
   return (
@@ -271,6 +269,11 @@ function EarlyAccess() {
             </>
           )}
         </form>
+        {error && !submitted && (
+          <p className="text-[#D4956B] text-sm mt-3">
+            Something went wrong. Please try again or email contact@obravio.com.
+          </p>
+        )}
       </div>
     </section>
   );
@@ -287,7 +290,7 @@ function Footer() {
             <a href="#features" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Features</a>
             <Link to="/privacy" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Terms of Service</Link>
-            <a href="mailto:contact@obravio.com" className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors">Contact</a>
+            <ContactLink className="label-uppercase text-white/35 hover:text-[#D4956B] transition-colors" />
           </div>
           <div className="flex items-center gap-2 text-[#B87333]/50 text-sm">
             <Palmtree className="w-4 h-4" /><span>Made in Miami</span>
